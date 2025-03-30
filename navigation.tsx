@@ -1,53 +1,101 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { Ionicons } from "@expo/vector-icons"; // ✅ Icons for the navbar
+import { Ionicons } from "@expo/vector-icons";
+import { View, Text, StyleSheet, ImageSourcePropType  } from "react-native";
 
-import HomeScreen from "./screens/Home";
+import HomeScreen from "./screens/HomeScreen";
+import PresidentScreen from "./screens/PresidentScreen";
+import CandidateScreen from "./screens/CandidateScreen";
 import Ballot from "./screens/Ballot";
 
-// Define the param list
 export type StackParamList = {
     Home: undefined;
-    Ballot: undefined;
+    President: { category: string };
+    Candidate: { name: string; location: string; party: string; experience: string; image: ImageSourcePropType };
 };
 
 const Stack = createNativeStackNavigator<StackParamList>();
-const Tab = createBottomTabNavigator<StackParamList>();
+const Tab = createBottomTabNavigator();
 
-// ✅ Create a Bottom Tab Navigator
 function BottomTabs() {
     return (
         <Tab.Navigator
             screenOptions={({ route }) => ({
-                tabBarIcon: ({ color, size }) => {
+                tabBarStyle: styles.tabBar,
+                tabBarShowLabel: false,
+                tabBarIcon: ({ focused }) => {
                     let iconName;
+                    let label;
+                    let iconColor = focused ? "#E38E49" : "white"; // Orange when active
+
                     if (route.name === "Home") {
                         iconName = "home";
+                        label = "Home";
                     } else if (route.name === "Ballot") {
-                        iconName = "document-text";
+                        iconName = "clipboard";
+                        label = "Ballot";
+                    } else if (route.name === "Compare") {
+                        iconName = "swap-horizontal";
+                        label = "Compare";
+                    } else if (route.name === "Information") {
+                        iconName = "information-circle";
+                        label = "Info"; // Shortened to fit
+                    } else if (route.name === "Profile") {
+                        iconName = "person";
+                        label = "Profile";
                     }
-                    return <Ionicons name={iconName as any} size={size} color={color} />;
+
+                    return (
+                        <View style={styles.iconContainer}>
+                            <Ionicons name={iconName as any} size={24} color={iconColor} />
+                            <Text style={styles.iconText} numberOfLines={1} ellipsizeMode="tail">
+                                {label}
+                            </Text>
+                        </View>
+                    );
                 },
-                tabBarActiveTintColor: "blue",
-                tabBarInactiveTintColor: "gray",
             })}
         >
-            <Tab.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} 
-            />
-            <Tab.Screen name="Ballot" component={Ballot} options={{ headerShown: false }} 
- />
+            <Tab.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
+            <Tab.Screen name="Ballot" component={Ballot} options={{ headerShown: false }} />
+            <Tab.Screen name="Compare" component={HomeScreen} options={{ headerShown: false }} />
+            <Tab.Screen name="Information" component={HomeScreen} options={{ headerShown: false }} />
+            <Tab.Screen name="Profile" component={HomeScreen} options={{ headerShown: false }} />
         </Tab.Navigator>
     );
 }
 
-// ✅ Main Navigation (Stack Navigation)
 export default function Navigation() {
     return (
         <NavigationContainer>
             <Stack.Navigator screenOptions={{ headerShown: false }}>
                 <Stack.Screen name="Home" component={BottomTabs} />
+                <Stack.Screen name="President" component={PresidentScreen} />
+                <Stack.Screen name="Candidate" component={CandidateScreen} />
             </Stack.Navigator>
         </NavigationContainer>
     );
 }
+
+const styles = StyleSheet.create({
+    tabBar: {
+        backgroundColor: "#1F509A",
+        height: 70,
+        paddingBottom: 70,
+        paddingTop: 10,
+    },
+    iconContainer: {
+        alignItems: "center",
+        justifyContent: "center",
+        width: 70, // Ensures enough space
+        height: 100,
+    },
+    iconText: {
+        fontSize: 10, // Slightly reduced size to fit
+        marginTop: 2,
+        fontWeight: "bold",
+        color: "white",
+        textAlign: "center",
+    },
+});
