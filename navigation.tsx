@@ -8,11 +8,11 @@ import HomeScreen from "./screens/HomeScreen";
 import PresidentScreen from "./screens/PresidentScreen";
 import CandidateScreen from "./screens/CandidateScreen";
 import Ballot from "./screens/Ballot";
-
+import AdministrationProgress from "./screens/administrationprogress";
 export type StackParamList = {
     Home: undefined;
     President: { category: string };
-    Candidate: { name: string; location: string; party: string; experience: string; image: ImageSourcePropType };
+    Candidate: { name: string; location: string; party: string; experience: string; image: ImageSourcePropType, age: number };
 };
 
 const Stack = createNativeStackNavigator<StackParamList>();
@@ -60,7 +60,7 @@ function BottomTabs() {
             <Tab.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
             <Tab.Screen name="Ballot" component={Ballot} options={{ headerShown: false }} />
             <Tab.Screen name="Compare" component={HomeScreen} options={{ headerShown: false }} />
-            <Tab.Screen name="Information" component={HomeScreen} options={{ headerShown: false }} />
+            <Tab.Screen name="Information" component={AdministrationProgress} options={{ headerShown: false }} />
             <Tab.Screen name="Profile" component={HomeScreen} options={{ headerShown: false }} />
         </Tab.Navigator>
     );

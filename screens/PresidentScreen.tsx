@@ -10,13 +10,13 @@ import { Ionicons } from "@expo/vector-icons"; // 🔹 For the back button icon
 type PresidentScreenRouteProp = RouteProp<StackParamList, "President">;
 
 const candidates = [
-    { name: "John Doe", location: "City A", party: "Independent", experience: "10 years in politics", image: require("../assets/c1.png") },
-    { name: "Jane Smith", location: "City B", party: "Democratic", experience: "15 years in government", image: require("../assets/c1.png") },
-    { name: "Jane Smith", location: "City B", party: "Democratic", experience: "15 years in government", image: require("../assets/c1.png") },
-    { name: "Jane Smith", location: "City B", party: "Democratic", experience: "15 years in government", image: require("../assets/c1.png") },
-    { name: "Jane Smith", location: "City B", party: "Democratic", experience: "15 years in government", image: require("../assets/c1.png") },
-
+    { name: "Carlos Mendoza", age: 52, location: "Quezon City", party: "Party A", experience: "12 years in public service", image: require("../assets/c1.png") },
+    { name: "Maria Santos", age: 45, location: "Cebu City", party: "Party B", experience: "8 years as a legislator", image: require("../assets/c1.png") },
+    { name: "Ramon Villanueva", age: 60, location: "Davao City", party: "Party C", experience: "20 years in local government", image: require("../assets/c1.png") },
+    { name: "Angela Cruz", age: 48, location: "Baguio City", party: "Party A", experience: "10 years in community development", image: require("../assets/c1.png") },
+    { name: "Victor Reyes", age: 55, location: "Iloilo City", party: "Party B", experience: "15 years in national politics", image: require("../assets/c1.png") },
 ];
+
 
 const PresidentScreen = () => {
     const navigation = useNavigation<NativeStackNavigationProp<StackParamList>>();
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
         fontSize: 24,
         fontWeight: "bold",
         color: "white",
-        marginLeft: 90
+        marginLeft: 80
 
     },
     contentContainer: {

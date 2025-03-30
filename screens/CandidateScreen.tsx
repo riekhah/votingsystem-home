@@ -16,10 +16,39 @@ const CandidateScreen = () => {
 
     // Candidate details
     const tabDetails = {
-        Education: "Graduated from XYZ University with a degree in Political Science.",
-        "Govt Experience": "Served as Mayor of City A for 10 years.",
-        "Legislative Work": "Authored 5 major bills on economic reform and healthcare.",
+        Education: (
+            <View>
+                <Text style={styles.boldText}>Law School</Text>
+                <Text>University of Nueva Caceres, 1990</Text>
+    
+                <Text style={styles.boldText}>Tertiary</Text>
+                <Text>University of the Philippines Diliman, 1986</Text>
+    
+                <Text style={styles.boldText}>Secondary</Text>
+                <Text>San Fernando College, 1982</Text>
+    
+                <Text style={styles.boldText}>Primary</Text>
+                <Text>San Isabel Elementary School, 1978</Text>
+            </View>
+        ),
+    
+        "Govt Experience": (
+            <Text >
+                Served as Mayor of City A for 10 years, implementing various infrastructure and economic programs.
+            </Text>
+        ),
+    
+        "Legislative Work": (
+            <View>
+                <Text style={styles.listItem}>• Principal author of the <Text style={styles.boldText}>Freedom of Information Act</Text>, promoting government transparency and accountability.</Text>
+                <Text style={styles.listItem}>• Championed amendments to the <Text style={styles.boldText}>Local Government Code</Text>, increasing internal revenue allocations for LGUs.</Text>
+                <Text style={styles.listItem}>• Sponsored the <Text style={styles.boldText}>Public Health Accessibility Act</Text>, ensuring free healthcare for marginalized communities.</Text>
+                <Text style={styles.listItem}>• Advocated for the <Text style={styles.boldText}>Workers' Protection Act</Text>, strengthening labor rights and fair wages.</Text>
+                <Text style={styles.listItem}>• Co-authored the <Text style={styles.boldText}>National Disaster Preparedness Act</Text>, improving response systems for calamities.</Text>
+            </View>
+        ),
     };
+    
 
     return (
         <View style={styles.container}>
@@ -32,7 +61,9 @@ const CandidateScreen = () => {
                 <Image source={route.params.image} style={styles.image} />
                 <Text style={styles.name}>{route.params.name}</Text>
                 <Text style={styles.party}>{route.params.party}</Text>
-                <Text style={styles.experience}>{route.params.experience}</Text>
+                <Text style={styles.experience}>Age: {route.params.age}</Text>
+
+                <Text style={styles.experience}> Place of Birth: {route.params.location}</Text>
             </View>
 
             {/* White Bottom Section */}
@@ -67,7 +98,7 @@ const styles = StyleSheet.create({
 
     topSection: {
         flex: 1,
-        backgroundColor: "#007bff",
+        backgroundColor: "#1F509A",
         alignItems: "center",
         justifyContent: "center",
         paddingTop: 40,
@@ -103,18 +134,16 @@ const styles = StyleSheet.create({
     
     image: {
         width: 120,
-        height: 120,
-        borderRadius: 60,
+        height: 150,
+        borderRadius: 10,
         marginBottom: 10,
+        backgroundColor: 'white',
     },
     
     name: {
         fontSize: 24,
         fontWeight: "bold",
         color: "white",
-        textShadowColor: "rgba(0, 0, 0, 0.3)",
-        textShadowOffset: { width: 2, height: 2 },
-        textShadowRadius: 3,
     },
     
     party: {
@@ -143,7 +172,7 @@ const styles = StyleSheet.create({
     },
     
     activeTab: {
-        borderBottomColor: "#007bff",
+        borderBottomColor: "#1F509A",
     },
     
     tabText: {
@@ -152,15 +181,30 @@ const styles = StyleSheet.create({
     },
     
     activeTabText: {
-        color: "#007bff",
+        color: "#1F509A",
         fontWeight: "bold",
     },
     
     tabContent: {
         fontSize: 16,
         color: "black",
-        marginTop: 10,
+        marginTop: 0,
     },
+    boldText: {
+        fontWeight: "bold",
+        fontSize: 16,
+        marginTop: 10,
+        lineHeight: 30, // Adjust line spacing for bold text
+    },
+    normalText: {
+        fontSize: 14,
+        lineHeight: 30, // Adjust line spacing for normal text
+    },
+    listItem: {
+        marginTop: 5,
+        fontSize: 14,
+        lineHeight: 22, // Adjust spacing for list items
+    }
 });
 
 export default CandidateScreen;
